@@ -1,4 +1,4 @@
-   
+  //longest common subsequence 
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -59,7 +59,7 @@ void lcsprint( string X, string Y, int m, int n , vector<vector<ll> > &dp)
          j--;
    }
  
-   cout<<lcs;
+   cout<<lcs<<endl;
 }
 int main(int argc, char const *argv[]) {
 	//clock_t begin = clock();
@@ -80,7 +80,7 @@ int main(int argc, char const *argv[]) {
 		}
 	}
 	lcsprint(s1, s2, n, m, dp);
-	//cout<<dp[n][m];
+	cout<<dp[n][m];
 
 
 	return 0;

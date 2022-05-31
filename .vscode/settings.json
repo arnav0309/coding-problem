@@ -1,3 +1,4 @@
 {
-    "editor.dragAndDrop": false
+    "editor.dragAndDrop": false,
+    "C_Cpp.errorSquiggles": "Disabled"
 }

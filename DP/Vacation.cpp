@@ -1,3 +1,5 @@
+//https://atcoder.jp/contests/dp/tasks/dp_c
+
    
 #include <bits/stdc++.h>
 using namespace std;
@@ -36,48 +38,8 @@ void file_i_o(){
     #endif 
 }     
 
-int lis(std::vector<int> v){   // time complexity O(n^2)
-	int n = v.size();
-	std::vector<int> dp(n,1);
-	for (int i = 1; i < n; i++)
-	{
-		/* code */
-		for (int j = 0; j < i; j++)
-		{
-			/* code */
-			if(v[i]>v[j]){
-				dp[i]=max(dp[i],1+dp[j]);
-			}
-		}
-	}
-	return *max_element(dp.begin(),dp.end());
-}
 
 
-int lisOp(vector<int> v){  // O(n*logn)
-    int n = v.size();
-    vector<int>dp(n,1);
-    map<int,int>mp; // store element (v[i]) and (dp[i]) in sorted order
-    mp[v[0]]=1;
-    int ans = dp[0];
-    for(int i=1;i<n;i++){
-        auto it = mp.lower_bound(v[i]+1); //first value >x
-        if(it!=mp.begin()){
-            it--;
-            dp[i]+=it->second;
-        }
-        mp[v[i]] = dp[i];
-        it=mp.upper_bound(v[i]);
-        while(it!=mp.end() and it->second<=dp[i]){
-            auto t = it;
-            t++;
-            mp.erase(it);
-            it=t;
-        }
-        ans = max(ans,dp[i]);
-    }
-    return ans; 
-}
 
 int main(int argc, char const *argv[])
 {
@@ -86,16 +48,20 @@ int main(int argc, char const *argv[])
     file_i_o();
     int n;
     cin>>n;
-    std::vector<int> v(n);
-    for (int i = 0; i < n; i++)
-    {
-    	/* code */
-    	cin>>v[i];
-
+    vector<vector<int>>dp(3,vector<int>(n,0));
+    int a,b,c;
+    cin>>a>>b>>c;
+    dp[0][0]=a;
+    dp[1][0] = b;
+    dp[2][0] = c;
+    
+    loop(i,1,n-1){
+        cin>>a>>b>>c;
+        dp[0][i] = a+max(dp[1][i-1],dp[2][i-1]);
+        dp[1][i] = b+max(dp[0][i-1],dp[2][i-1]);
+        dp[2][i] = c+max(dp[1][i-1],dp[0][i-1]);
     }
-    //cout<<lis(v);
-    cout<<lisOp(v);
-
+    cout<<max({dp[0][n-1],dp[1][n-1],dp[2][n-1]});
     return 0;
 
 }

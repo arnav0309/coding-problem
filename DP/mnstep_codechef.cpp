@@ -1,3 +1,12 @@
+/*Given two stringsSandIconsists of only lowercase characters.Chef wants to
+convert S to T and to achieve that he can do one of the following operations in
+each step:
+ •Insertacharacter at any position.
+ •Deleteacharacter at any position.
+   Replaceacharacter with another character at any position.
+Help Chef to find the minimum number of steps needed to convertSto T.
+
+*/
    
 #include <bits/stdc++.h>
 using namespace std;
@@ -35,48 +44,29 @@ void file_i_o(){
         freopen("/home/anand/Desktop/InputOutput/output.txt", "w", stdout);
     #endif 
 }     
-
-int lis(std::vector<int> v){   // time complexity O(n^2)
-	int n = v.size();
-	std::vector<int> dp(n,1);
-	for (int i = 1; i < n; i++)
-	{
-		/* code */
-		for (int j = 0; j < i; j++)
-		{
-			/* code */
-			if(v[i]>v[j]){
-				dp[i]=max(dp[i],1+dp[j]);
-			}
-		}
-	}
-	return *max_element(dp.begin(),dp.end());
+bool comp(int a, int b)
+{
+    return (a < b);
 }
 
+int fun(string s1,string s2){
+    int m = s1.size();
+    int n = s2.size();
+    vector<vector<int>>dp(m+1,vector<int>(n+1,0));
+    for(int i=0;i<=m;i++){
+        for(int j=0;j<=n;j++){
+            if(i==0) dp[i][j] = j;
+            else if(j==0) dp[i][j] = i;
 
-int lisOp(vector<int> v){  // O(n*logn)
-    int n = v.size();
-    vector<int>dp(n,1);
-    map<int,int>mp; // store element (v[i]) and (dp[i]) in sorted order
-    mp[v[0]]=1;
-    int ans = dp[0];
-    for(int i=1;i<n;i++){
-        auto it = mp.lower_bound(v[i]+1); //first value >x
-        if(it!=mp.begin()){
-            it--;
-            dp[i]+=it->second;
+            else if(s1[i-1]==s2[j-1]){
+                dp[i][j]=dp[i-1][j-1];
+            }
+            else{
+                dp[i][j] = 1+ min({dp[i-1][j],dp[i][j-1],dp[i-1][j-1]});
+            }
         }
-        mp[v[i]] = dp[i];
-        it=mp.upper_bound(v[i]);
-        while(it!=mp.end() and it->second<=dp[i]){
-            auto t = it;
-            t++;
-            mp.erase(it);
-            it=t;
-        }
-        ans = max(ans,dp[i]);
     }
-    return ans; 
+    return dp[m][n];
 }
 
 int main(int argc, char const *argv[])
@@ -84,18 +74,9 @@ int main(int argc, char const *argv[])
 
     
     file_i_o();
-    int n;
-    cin>>n;
-    std::vector<int> v(n);
-    for (int i = 0; i < n; i++)
-    {
-    	/* code */
-    	cin>>v[i];
-
-    }
-    //cout<<lis(v);
-    cout<<lisOp(v);
-
+    string s1,s2;
+    cin>>s1>>s2;
+    cout<<fun(s1,s2);
     return 0;
 
 }

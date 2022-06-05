@@ -36,56 +36,46 @@ void file_i_o(){
     #endif 
 }     
 
-
-class Node
-{
-public:
-	int data;
-	Node* left;
-	Node* right;
-	Node(int d){
-		data=d;
-		left=NULL;
-		right=NULL;
-	}
-};
-
-Node* build(){
-	int d;
-	cin>>d;
-	if(d==-1) return NULL;
-	Node* root = new Node(d);
-	root->left=build();
-	root->right = build();
-	return root;
+int gameTopDown(vector<int>v,int i,int j){
+    int n = v.size();
+    int dp[n][n];
+    memset(dp,-1,sizeof(dp));
+    if(i==j) return v[i];
+    if(i+1==j) return max(v[i],v[j]);
+    int op1 = v[i]+min(gameTopDown(v,i+2,j),gameTopDown(v,i+1,j-1));
+    int op2 = v[j]+min(gameTopDown(v,i+1,j-1),gameTopDown(v,i,j-2));
+    dp[i][j] = max(op1,op2);
+    return dp[i][j];
 }
 
-int height(Node* root){
-   if(root == NULL) return 0;
-   if(root->left == NULL and root->right==NULL) return 0;
-   int lh = height(root->left);
-   int rh = height(root->right);
-   return max(lh,rh)+1;
-}
-int ans=0;
- int diameter(TreeNode* r){
-        if(r==NULL) return 0;
-        //if(r->left==NULL and r->right==NULL) return 0;
-        int lh=height(r->left);
-        int rh = height(r->right);
-        ans=max(ans,lh+rh);
-        return max(lh,rh)+1;
+int game(vector<int>& v){ //Bootom up solution
+    int n = v.size();
+    int dp[n][n];
+    memset(dp,-1,sizeof(dp));
+    for(int len=0;len<n;len++){
+        for(int i=0,j=len;i<=len,j<n;i++,j++){
+            int a = ((i+2)<=j)?dp[i+2][j]:0;
+            int b = ((i+1)<=j-1)?dp[i+1][j-1]:0;
+            int c = (i<=j-2)?dp[i][j-2]:0;
+            dp[i][j] = max(v[i]+min(a,b),v[j]+min(b,c));
+        }
     }
+        return dp[0][n-1];
+    }
+
+
 
 int main(int argc, char const *argv[])
 {
 
     
     file_i_o();
-    
-    Node* root = build();
-    cout<<diameter(root);
-
+    int n;
+    cin>>n;
+    vector<int>v(n);
+    loop(i,0,n-1) cin>>v[i];
+    cout<<game(v)<<endl;
+    cout<<gameTopDown(v,0,n-1);
     return 0;
 
 }

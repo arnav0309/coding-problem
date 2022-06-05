@@ -1,4 +1,4 @@
-   
+ // Marix chain multiplication  
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -36,56 +36,39 @@ void file_i_o(){
     #endif 
 }     
 
-
-class Node
-{
-public:
-	int data;
-	Node* left;
-	Node* right;
-	Node(int d){
-		data=d;
-		left=NULL;
-		right=NULL;
-	}
-};
-
-Node* build(){
-	int d;
-	cin>>d;
-	if(d==-1) return NULL;
-	Node* root = new Node(d);
-	root->left=build();
-	root->right = build();
-	return root;
-}
-
-int height(Node* root){
-   if(root == NULL) return 0;
-   if(root->left == NULL and root->right==NULL) return 0;
-   int lh = height(root->left);
-   int rh = height(root->right);
-   return max(lh,rh)+1;
-}
-int ans=0;
- int diameter(TreeNode* r){
-        if(r==NULL) return 0;
-        //if(r->left==NULL and r->right==NULL) return 0;
-        int lh=height(r->left);
-        int rh = height(r->right);
-        ans=max(ans,lh+rh);
-        return max(lh,rh)+1;
+long long int mcm(vi &v,int i,int j){
+    if(i==j) return 0;
+    ll ans =INT_MAX;
+    for(int k=i;k<j;k++){
+        ans = min(ans,mcm(v,i,k)+mcm(v,k+1,j)+v[i-1]*v[k]*v[j]);
     }
+    return ans;
+}
+int dp[100][100];
+ll mcmDp(vi &v,int i,int j){
+    if(i==j) return 0;
+   if(dp[i][j]!=-1) return dp[i][j];
+   ll ans = INT_MAX;
+    for(int k=i;k<j;k++){
+        ans = min(ans,mcmDp(v,i,k)+mcmDp(v,k+1,j)+v[i-1]*v[k]*v[j]);
+    }
+    return dp[i][j] = ans;
+}
 
 int main(int argc, char const *argv[])
 {
 
     
     file_i_o();
-    
-    Node* root = build();
-    cout<<diameter(root);
-
+   int n;
+   cin>>n;
+   vi v(n);
+   memset(dp,-1,sizeof(dp));
+   for(int i=0;i<n;i++){
+       cin>>v[i];
+   }
+  cout<<mcm(v,1,n-1)<<endl;
+  cout<<mcmDp(v,1,n-1)<<endl;
     return 0;
 
 }

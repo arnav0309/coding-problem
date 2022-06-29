@@ -10,10 +10,9 @@ using namespace std;
 #define mp                 make_pair
 #define pii                pair<ll, ll>
 #define vi                 vector<ll>
-#define vs                 vector<string>
+#define vs                 vector<string>=
 #define mii                map<ll, ll>
 #define ump                unordered_map<ll, ll>
-#define all(n)               n.begin(),n.end()
 #define mid(l,r)           (l+(r-l)/2)
 #define pq_max             priority_queue<ll>
 #define pq_min             priority_queue<int, vi, greater<ll> >
@@ -27,12 +26,12 @@ using namespace std;
 #define loop(i,a,b)     for(int i=(a);i<=(b);i++)
 
 void file_i_o(){
-        ios_base::sync_with_stdio(false);
+ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
    #ifndef ONLINE_JUDGE
-       freopen("/home/anand/Desktop/InputOutput/input.txt", "r", stdin);
-        freopen("/home/anand/Desktop/InputOutput/output.txt", "w", stdout);
+       freopen("C:/Users/arnav/Desktop/InputOutput/input.txt", "r", stdin);
+        freopen("C:/Users/arnav/Desktop/InputOutput/output.txt", "w", stdout);
     #endif 
 }     
 
@@ -40,14 +39,12 @@ void file_i_o(){
 
 
 int main(int argc, char const *argv[])
-{
+ {
+ 
+     file_i_o();
+      int a;
+      cin>>a;
+      cout<<a;
+     return 0;
 
-    
-    file_i_o();
-  int n;
-  cin>>n;
-  cout<<n<<endl;
-
-    return 0;
-
-}
+ }

@@ -34,15 +34,26 @@ ios_base::sync_with_stdio(false);
         freopen("C:/Users/arnav/Desktop/InputOutput/output.txt", "w", stdout);
     #endif 
 }     
-
-
+ll dp[3005][3005];
+ll v[3005];
+ll deq(int i,int j){
+    if(dp[i][j]!=-1) return dp[i][j];
+    if(i==j) return dp[i][j] = v[i];
+    return dp[i][j] = std::max(v[i]-deq(i+1,j),v[j]-deq(i,j-1));
+}
 
 
 int main(int argc, char const *argv[])
  {
  
      file_i_o();
+      int n;
+      cin>>n;
       
+      memset(dp,-1,sizeof dp);
+      loop(i,0,n-1) cin>>v[i];
+      cout<<deq(0,n-1);
+     
      return 0;
 
  }

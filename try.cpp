@@ -35,6 +35,25 @@ ios_base::sync_with_stdio(false);
     #endif 
 }     
 
+#include <iostream>
+ 
+using namespace std;
+ 
+void printSubstrings(string str)
+{
+ 
+    // First loop for starting index
+    for (int i = 0; i < str.length(); i++) {
+        string subStr;
+        cout<<"is"<<subStr<<endl;
+        // Second loop is generating sub-string
+        for (int j = i; j < str.length(); j++) {
+            subStr += str[j];
+            cout << subStr << endl;
+        }
+    }
+}
+ 
 
 
 
@@ -42,9 +61,8 @@ int main(int argc, char const *argv[])
  {
  
      file_i_o();
-      int a;
-      cin>>a;
-      cout<<a;
+      string str = "abcd";
+     printSubstrings(str);
      return 0;
 
  }

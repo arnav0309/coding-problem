@@ -26,15 +26,15 @@ using namespace std;
 #define w(x)               int x; cin>>x; while(x--)
 #define loop(i,a,b)     for(int i=(a);i<=(b);i++)
 
-// void file_i_o(){
-//         ios_base::sync_with_stdio(false);
-//     cin.tie(NULL);
-//     cout.tie(NULL);
-//    #ifndef ONLINE_JUDGE
-//        freopen("/home/anand/Desktop/InputOutput/input.txt", "r", stdin);
-//         freopen("/home/anand/Desktop/InputOutput/output.txt", "w", stdout);
-//     #endif 
-// }     
+void file_i_o(){
+        ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+   #ifndef ONLINE_JUDGE
+       freopen("/home/anand/Desktop/InputOutput/input.txt", "r", stdin);
+        freopen("/home/anand/Desktop/InputOutput/output.txt", "w", stdout);
+    #endif 
+}     
 
 std::vector<int> g[200010];
 ll dp[200010];

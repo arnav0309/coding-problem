@@ -1,3 +1,4 @@
+
  // Marix chain multiplication  
 #include <bits/stdc++.h>
 using namespace std;
@@ -31,8 +32,8 @@ void file_i_o(){
     cin.tie(NULL);
     cout.tie(NULL);
    #ifndef ONLINE_JUDGE
-       freopen("/home/anand/Desktop/InputOutput/input.txt", "r", stdin);
-        freopen("/home/anand/Desktop/InputOutput/output.txt", "w", stdout);
+       freopen("C:/Users/arnav/Desktop/InputOutput/input.txt", "r", stdin);
+        freopen("C:/Users/arnav/Desktop/InputOutput/output.txt", "w", stdout);
     #endif 
 }     
 

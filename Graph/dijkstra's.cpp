@@ -48,7 +48,7 @@ void dijkstra(int s,vb &mark,vi &dist,vmpi G)
         int u = pq.top().se;
         pq.pop();
         
-        if (mark[u]) continue; else mark[u] = true;
+        //if (mark[u]) continue; else mark[u] = true;
         for(auto v : G[u])
         {
             if (dist[v.fi] > dist[u] + v.se)
